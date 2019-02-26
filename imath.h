@@ -61,7 +61,7 @@ typedef struct {
   mp_size   alloc;
   mp_size   used;
   mp_sign   sign;
-} mpz_t, *mp_int;
+} impz_t, *mp_int;
 
 static inline mp_digit* MP_DIGITS(mp_int Z) { return Z->digits; }
 static inline mp_size   MP_ALLOC(mp_int Z)  { return Z->alloc; }
@@ -114,7 +114,7 @@ static inline bool mp_int_is_even(mp_int z) { return (z->digits[0] & 1) == 0; }
     cannot fail unless `z == NULL`. */
 mp_result mp_int_init(mp_int z);
 
-/** Allocates a fresh zero-valued `mpz_t` on the heap, returning NULL in case
+/** Allocates a fresh zero-valued `impz_t` on the heap, returning NULL in case
     of error. The only possible error is out-of-memory. */
 mp_int mp_int_alloc(void);
 

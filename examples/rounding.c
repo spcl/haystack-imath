@@ -36,7 +36,7 @@
 int main(int argc, char *argv[]) {
   mp_result mode, len, res = 0;
   mp_size prec, radix;
-  mpq_t value;
+  impq_t value;
   char *buf;
 
   if (argc < 5) {

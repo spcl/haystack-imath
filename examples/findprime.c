@@ -34,7 +34,7 @@
 
 int main(int argc, char *argv[]) {
   char buf[4096];
-  mpz_t seed;
+  impz_t seed;
   mp_result res;
 
   if (argc < 2) {

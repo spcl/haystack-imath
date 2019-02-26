@@ -48,11 +48,11 @@
 #include "iprime.h"
 
 typedef struct {
-  mpz_t p;
-  mpz_t q;
-  mpz_t n;
-  mpz_t e;
-  mpz_t d;
+  impz_t p;
+  impz_t q;
+  impz_t n;
+  impz_t e;
+  impz_t d;
 } rsa_key;
 
 /* Load the specified buffer with random bytes */

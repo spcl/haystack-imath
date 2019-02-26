@@ -152,7 +152,7 @@ void GMPQAPI(canonicalize)(mp_rat op) { CHECK(mp_rat_reduce(op)); }
 /* gmp: mpz_addmul */
 /* gmp: rop = rop + (op1 * op2) */
 void GMPZAPI(addmul)(mp_int rop, mp_int op1, mp_int op2) {
-  mpz_t tempz;
+  impz_t tempz;
   mp_int temp = &tempz;
   mp_int_init(temp);
 
@@ -172,7 +172,7 @@ void GMPZAPI(divexact)(mp_int q, mp_int n, mp_int d) {
 /* gmp: 0 is considered to divide only 0 */
 int GMPZAPI(divisible_p)(mp_int n, mp_int d) {
   /* variables to hold remainder */
-  mpz_t rz;
+  impz_t rz;
   mp_int r = &rz;
   int r_is_zero;
 
@@ -193,7 +193,7 @@ int GMPZAPI(divisible_p)(mp_int n, mp_int d) {
 /* gmp: mpz_submul */
 /* gmp: rop = rop - (op1 * op2) */
 void GMPZAPI(submul)(mp_int rop, mp_int op1, mp_int op2) {
-  mpz_t tempz;
+  impz_t tempz;
   mp_int temp = &tempz;
   mp_int_init(temp);
 
@@ -205,7 +205,7 @@ void GMPZAPI(submul)(mp_int rop, mp_int op1, mp_int op2) {
 
 /* gmp: mpz_add_ui */
 void GMPZAPI(add_ui)(mp_int rop, mp_int op1, unsigned long op2) {
-  mpz_t tempz;
+  impz_t tempz;
   mp_int temp = &tempz;
   CHECK(mp_int_init_uvalue(temp, op2));
 
@@ -217,7 +217,7 @@ void GMPZAPI(add_ui)(mp_int rop, mp_int op1, unsigned long op2) {
 /* gmp: mpz_divexact_ui */
 /* gmp: only produces correct results when d divides n */
 void GMPZAPI(divexact_ui)(mp_int q, mp_int n, unsigned long d) {
-  mpz_t tempz;
+  impz_t tempz;
   mp_int temp = &tempz;
   CHECK(mp_int_init_uvalue(temp, d));
 
@@ -228,7 +228,7 @@ void GMPZAPI(divexact_ui)(mp_int q, mp_int n, unsigned long d) {
 
 /* gmp: mpz_mul_ui */
 void GMPZAPI(mul_ui)(mp_int rop, mp_int op1, unsigned long op2) {
-  mpz_t tempz;
+  impz_t tempz;
   mp_int temp = &tempz;
   CHECK(mp_int_init_uvalue(temp, op2));
 
@@ -240,7 +240,7 @@ void GMPZAPI(mul_ui)(mp_int rop, mp_int op1, unsigned long op2) {
 /* gmp: mpz_pow_ui */
 /* gmp: 0^0 = 1 */
 void GMPZAPI(pow_ui)(mp_int rop, mp_int base, unsigned long exp) {
-  mpz_t tempz;
+  impz_t tempz;
   mp_int temp = &tempz;
 
   /* check for 0^0 */
@@ -257,7 +257,7 @@ void GMPZAPI(pow_ui)(mp_int rop, mp_int base, unsigned long exp) {
 
 /* gmp: mpz_sub_ui */
 void GMPZAPI(sub_ui)(mp_int rop, mp_int op1, unsigned long op2) {
-  mpz_t tempz;
+  impz_t tempz;
   mp_int temp = &tempz;
   CHECK(mp_int_init_uvalue(temp, op2));
 
@@ -529,7 +529,7 @@ void GMPZAPI(mul_2exp)(mp_int rop, mp_int op1, unsigned long op2) {
 
 /* gmp: mpz_cdiv_q */
 void GMPZAPI(cdiv_q)(mp_int q, mp_int n, mp_int d) {
-  mpz_t rz;
+  impz_t rz;
   mp_int r = &rz;
   int qsign, rsign, nsign, dsign;
   CHECK(mp_int_init(r));
@@ -560,7 +560,7 @@ void GMPZAPI(cdiv_q)(mp_int q, mp_int n, mp_int d) {
 
 /* gmp: mpz_fdiv_q */
 void GMPZAPI(fdiv_q)(mp_int q, mp_int n, mp_int d) {
-  mpz_t rz;
+  impz_t rz;
   mp_int r = &rz;
   int qsign, rsign, nsign, dsign;
   CHECK(mp_int_init(r));
@@ -591,10 +591,10 @@ void GMPZAPI(fdiv_q)(mp_int q, mp_int n, mp_int d) {
 
 /* gmp: mpz_fdiv_r */
 void GMPZAPI(fdiv_r)(mp_int r, mp_int n, mp_int d) {
-  mpz_t qz;
-  mpz_t tempz;
-  mpz_t orig_dz;
-  mpz_t orig_nz;
+  impz_t qz;
+  impz_t tempz;
+  impz_t orig_dz;
+  impz_t orig_nz;
   mp_int q = &qz;
   mp_int temp = &tempz;
   mp_int orig_d = &orig_dz;
@@ -619,7 +619,7 @@ void GMPZAPI(fdiv_r)(mp_int r, mp_int n, mp_int d) {
   mp_int_clear(orig_n);
 }
 
-/* gmp: mpz_tdiv_q */
+/* gmp: impz_tdiv_q */
 void GMPZAPI(tdiv_q)(mp_int q, mp_int n, mp_int d) {
   /* truncating division*/
   CHECK(mp_int_div(n, d, q, NULL));
@@ -627,11 +627,11 @@ void GMPZAPI(tdiv_q)(mp_int q, mp_int n, mp_int d) {
 
 /* gmp: mpz_fdiv_q_ui */
 unsigned long GMPZAPI(fdiv_q_ui)(mp_int q, mp_int n, unsigned long d) {
-  mpz_t tempz;
+  impz_t tempz;
   mp_int temp = &tempz;
-  mpz_t rz;
+  impz_t rz;
   mp_int r = &rz;
-  mpz_t orig_nz;
+  impz_t orig_nz;
   mp_int orig_n = &orig_nz;
   unsigned long rl;
   CHECK(mp_int_init_uvalue(temp, d));
@@ -733,7 +733,7 @@ void *GMPZAPI(export)(void *rop, size_t *countp, int order, size_t size,
 /* gmp: mpz_import */
 void GMPZAPI(import)(mp_int rop, size_t count, int order, size_t size,
                      int endian, size_t nails, const void *op) {
-  mpz_t tmpz;
+  impz_t tmpz;
   mp_int tmp = &tmpz;
   size_t total_size;
   size_t num_digits;

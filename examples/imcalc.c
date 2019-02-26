@@ -889,7 +889,7 @@ static mp_result cf_dec(cstate_t *sp) {
 }
 
 static mp_result cf_fact(cstate_t *sp) {
-  mpz_t tmp;
+  impz_t tmp;
   mp_int x = sp->elts[sp->used - 1];
   mp_result res = MP_OK;
 

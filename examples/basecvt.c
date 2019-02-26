@@ -34,7 +34,7 @@
 
 int main(int argc, char *argv[]) {
   mp_size in_rdx, out_rdx;
-  mpq_t value;
+  impq_t value;
   mp_result res;
   int ix;
 

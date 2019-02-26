@@ -32,7 +32,7 @@
 
 int main(int argc, char *argv[]) {
   unsigned char buf[512];
-  mpz_t v, w;
+  impz_t v, w;
   mp_result res;
   int len;
 

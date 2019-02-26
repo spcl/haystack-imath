@@ -43,7 +43,7 @@ char g_buf[4096];
 
 int main(int argc, char *argv[]) {
   mp_result res;
-  mpz_t sum1, sum2;
+  impz_t sum1, sum2;
   int ndigits, out = 0;
   clock_t start, end;
 
@@ -124,7 +124,7 @@ CLEANUP:
  */
 mp_result arctan(mp_small radix, mp_small mul, mp_small x, mp_small prec,
                  mp_int sum) {
-  mpz_t t, v;
+  impz_t t, v;
   mp_result res;
   mp_small rem, sign = 1, coeff = 1;
 

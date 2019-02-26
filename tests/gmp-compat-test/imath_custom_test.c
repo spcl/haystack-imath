@@ -1,7 +1,7 @@
 
 void test_mpz_export(char **out, char *rop, size_t *countp, int order,
                      size_t size, int endian, size_t nails, char *mpzstr) {
-  impz_t op;
+  iimpz_t op;
   impz_init(op);
   impz_set_str(op, mpzstr, 10);
   // printf("%p,%p,%d,%zi,%d,%zi,%s\n", rop, countp, order, size, endian, nails,
@@ -11,8 +11,8 @@ void test_mpz_export(char **out, char *rop, size_t *countp, int order,
 
 void test_mpz_import(char *out, void *unused, size_t count, int order,
                      size_t size, int endian, size_t nails, char *mpzstr) {
-  impz_t op;
-  impz_t rop;
+  iimpz_t op;
+  iimpz_t rop;
   impz_init(op);
   impz_init(rop);
   impz_set_str(op, mpzstr, 10);

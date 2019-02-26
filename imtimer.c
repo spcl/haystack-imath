@@ -132,7 +132,7 @@ double clocks_to_seconds(clock_t start, clock_t end) {
 }
 
 mp_int alloc_values(int nt, int prec) {
-  mp_int out = malloc(nt * sizeof(mpz_t));
+  mp_int out = malloc(nt * sizeof(impz_t));
   int i;
 
   if (out == NULL) return NULL;

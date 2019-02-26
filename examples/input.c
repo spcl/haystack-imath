@@ -35,7 +35,7 @@
 
 int main(int argc, char *argv[]) {
   mp_size radix = 10; /* Default output radix */
-  mpq_t value;
+  impq_t value;
   mp_result res;
   char *endp;
 

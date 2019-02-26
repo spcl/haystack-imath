@@ -128,14 +128,14 @@ static inline mp_size MAX(mp_size A, mp_size B) { return (B > A ? B : A); }
     B = t_;           \
   } while (0)
 
-/* Declare a block of N temporary mpz_t values.
+/* Declare a block of N temporary impz_t values.
    These values are initialized to zero.
    You must add CLEANUP_TEMP() at the end of the function.
    Use TEMP(i) to access a pointer to the ith value.
  */
 #define DECLARE_TEMP(N)                   \
   struct {                                \
-    mpz_t value[(N)];                     \
+    impz_t value[(N)];                     \
     int len;                              \
     mp_result err;                        \
   } temp_ = {                             \
@@ -376,7 +376,7 @@ mp_result mp_int_init(mp_int z) {
 }
 
 mp_int mp_int_alloc(void) {
-  mp_int out = malloc(sizeof(mpz_t));
+  mp_int out = malloc(sizeof(impz_t));
 
   if (out != NULL) mp_int_init(out);
 
@@ -425,7 +425,7 @@ mp_result mp_int_init_copy(mp_int z, mp_int old) {
 }
 
 mp_result mp_int_init_value(mp_int z, mp_small value) {
-  mpz_t vtmp;
+  impz_t vtmp;
   mp_digit vbuf[MP_VALUE_DIGITS(value)];
 
   s_fake(&vtmp, value, vbuf);
@@ -433,7 +433,7 @@ mp_result mp_int_init_value(mp_int z, mp_small value) {
 }
 
 mp_result mp_int_init_uvalue(mp_int z, mp_usmall uvalue) {
-  mpz_t vtmp;
+  impz_t vtmp;
   mp_digit vbuf[MP_VALUE_DIGITS(uvalue)];
 
   s_ufake(&vtmp, uvalue, vbuf);
@@ -441,7 +441,7 @@ mp_result mp_int_init_uvalue(mp_int z, mp_usmall uvalue) {
 }
 
 mp_result mp_int_set_value(mp_int z, mp_small value) {
-  mpz_t vtmp;
+  impz_t vtmp;
   mp_digit vbuf[MP_VALUE_DIGITS(value)];
 
   s_fake(&vtmp, value, vbuf);
@@ -449,7 +449,7 @@ mp_result mp_int_set_value(mp_int z, mp_small value) {
 }
 
 mp_result mp_int_set_uvalue(mp_int z, mp_usmall uvalue) {
-  mpz_t vtmp;
+  impz_t vtmp;
   mp_digit vbuf[MP_VALUE_DIGITS(uvalue)];
 
   s_ufake(&vtmp, uvalue, vbuf);
@@ -495,7 +495,7 @@ mp_result mp_int_copy(mp_int a, mp_int c) {
 
 void mp_int_swap(mp_int a, mp_int c) {
   if (a != c) {
-    mpz_t tmp = *a;
+    impz_t tmp = *a;
 
     *a = *c;
     *c = tmp;
@@ -592,7 +592,7 @@ mp_result mp_int_add(mp_int a, mp_int b, mp_int c) {
 }
 
 mp_result mp_int_add_value(mp_int a, mp_small value, mp_int c) {
-  mpz_t vtmp;
+  impz_t vtmp;
   mp_digit vbuf[MP_VALUE_DIGITS(value)];
 
   s_fake(&vtmp, value, vbuf);
@@ -654,7 +654,7 @@ mp_result mp_int_sub(mp_int a, mp_int b, mp_int c) {
 }
 
 mp_result mp_int_sub_value(mp_int a, mp_small value, mp_int c) {
-  mpz_t vtmp;
+  impz_t vtmp;
   mp_digit vbuf[MP_VALUE_DIGITS(value)];
 
   s_fake(&vtmp, value, vbuf);
@@ -713,7 +713,7 @@ mp_result mp_int_mul(mp_int a, mp_int b, mp_int c) {
 }
 
 mp_result mp_int_mul_value(mp_int a, mp_small value, mp_int c) {
-  mpz_t vtmp;
+  impz_t vtmp;
   mp_digit vbuf[MP_VALUE_DIGITS(value)];
 
   s_fake(&vtmp, value, vbuf);
@@ -870,7 +870,7 @@ mp_result mp_int_mod(mp_int a, mp_int m, mp_int c) {
 }
 
 mp_result mp_int_div_value(mp_int a, mp_small value, mp_int q, mp_small *r) {
-  mpz_t vtmp;
+  impz_t vtmp;
   mp_digit vbuf[MP_VALUE_DIGITS(value)];
   s_fake(&vtmp, value, vbuf);
 
@@ -1064,7 +1064,7 @@ mp_result mp_int_exptmod(mp_int a, mp_int b, mp_int m, mp_int c) {
 }
 
 mp_result mp_int_exptmod_evalue(mp_int a, mp_small value, mp_int m, mp_int c) {
-  mpz_t vtmp;
+  impz_t vtmp;
   mp_digit vbuf[MP_VALUE_DIGITS(value)];
 
   s_fake(&vtmp, value, vbuf);
@@ -1073,7 +1073,7 @@ mp_result mp_int_exptmod_evalue(mp_int a, mp_small value, mp_int m, mp_int c) {
 }
 
 mp_result mp_int_exptmod_bvalue(mp_small value, mp_int b, mp_int m, mp_int c) {
-  mpz_t vtmp;
+  impz_t vtmp;
   mp_digit vbuf[MP_VALUE_DIGITS(value)];
 
   s_fake(&vtmp, value, vbuf);
@@ -1447,7 +1447,7 @@ mp_result mp_int_to_string(mp_int z, mp_size radix, char *str, int limit) {
     *str++ = s_val2ch(0, 1);
   } else {
     mp_result res;
-    mpz_t tmp;
+    impz_t tmp;
     char *h, *t;
 
     if ((res = mp_int_init_copy(&tmp, z)) != MP_OK) return res;
@@ -1797,7 +1797,7 @@ static int s_vcmp(mp_int a, mp_small v) {
 }
 
 static int s_uvcmp(mp_int a, mp_usmall uv) {
-  mpz_t vtmp;
+  impz_t vtmp;
   mp_digit vdig[MP_VALUE_DIGITS(uv)];
 
   s_ufake(&vtmp, uv, vdig);
@@ -2570,7 +2570,7 @@ static mp_result s_udiv_knuth(mp_int u, mp_int v) {
 
   /* D2: Initialize j */
   int j = m;
-  mpz_t r;
+  impz_t r;
   r.digits = MP_DIGITS(u) + j; /* The contents of r are shared with u */
   r.used = n + 1;
   r.sign = MP_ZPOS;
